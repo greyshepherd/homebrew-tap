@@ -9,8 +9,12 @@ fragments and switch from the menu bar.
 
 ```sh
 brew tap greyshepherd/tap
+brew trust greyshepherd/tap
 brew install --cask hazmat
 ```
+
+`brew trust` is what lets Homebrew load a cask from a tap it does not ship;
+without it the install refuses and names the command.
 
 Hazmat updates itself from inside the app. This tap also reads the newest
 release once a day and bumps the cask to it, so `brew install` and `brew
