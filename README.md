@@ -12,8 +12,14 @@ brew tap greyshepherd/tap
 brew install --cask hazmat
 ```
 
-Hazmat updates itself from inside the app, so a cask bump here is only needed
-for a fresh install or an explicit `brew upgrade --cask hazmat`.
+Hazmat updates itself from inside the app. This tap also reads the newest
+release once a day and bumps the cask to it, so `brew install` and `brew
+upgrade` name the newest published build.
+
+### Bumping
+
+`Scripts/bump-hazmat.sh` writes the newest release into `Casks/hazmat.rb`, and
+the daily workflow runs it. Run it by hand to reach a fresh install sooner.
 
 ### Uninstalling
 
