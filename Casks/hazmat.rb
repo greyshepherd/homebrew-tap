@@ -2,8 +2,7 @@ cask "hazmat" do
   version "1.0.1"
   sha256 "b533717e01b9259b86d2bc9dfe49f456e008640d447bf4cd0f72b03183520466"
 
-  url "https://github.com/greyshepherd/hazmat/releases/download/v#{version}/Hazmat-#{version}.dmg",
-      verified: "github.com/greyshepherd/hazmat/"
+  url "https://github.com/greyshepherd/hazmat/releases/download/v#{version}/Hazmat-#{version}.dmg"
   name "Hazmat"
   desc "Hosts file manager with switchable profiles of shared fragments"
   homepage "https://github.com/greyshepherd/hazmat"
@@ -15,7 +14,7 @@ cask "hazmat" do
 
   auto_updates true
   depends_on arch: :arm64
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
 
   app "Hazmat.app"
 
