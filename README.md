@@ -24,6 +24,8 @@ upgrade` name the newest published build.
 
 `Scripts/bump-hazmat.sh` writes the newest release into `Casks/hazmat.rb`, and
 the daily workflow runs it. Run it by hand to reach a fresh install sooner.
+GitHub stops schedules in a repository that stays quiet for 60 days, so a tap
+that has seen no release for two months needs `gh workflow enable bump.yml`.
 
 ### Uninstalling
 
