@@ -12,9 +12,6 @@ brew tap greyshepherd/tap
 brew install --cask hazmat
 ```
 
-Recent Homebrew asks for confirmation when tapping a third-party tap; `brew
-trust greyshepherd/tap` grants it up front.
-
 Hazmat updates itself from inside the app, so a cask bump here is only needed
 for a fresh install or an explicit `brew upgrade --cask hazmat`.
 
