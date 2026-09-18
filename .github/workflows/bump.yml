@@ -1,0 +1,54 @@
+name: Bump
+
+on:
+  schedule:
+    # Daily, off the hour: a bump only has to beat the next person who installs.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: bump
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  HOMEBREW_NO_ENV_HINTS: "1"
+
+jobs:
+  hazmat:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Write the latest release into the cask
+        id: bump
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="$(Scripts/bump-hazmat.sh)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Commit the bump
+        if: steps.bump.outputs.version != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --message "hazmat ${{ steps.bump.outputs.version }}" Casks/hazmat.rb
+
+      # The bump is checked the way a person would get it: a tap is where Homebrew
+      # reads a cask from, so the working tree is tapped as a local repository and
+      # the cask is installed from there — the file about to be pushed, resolved
+      # and verified the way Homebrew resolves and verifies it. A failure here
+      # stops the push, so the runner's commit, and the runner, go away together.
+      - name: Install the cask as written
+        if: steps.bump.outputs.version != ''
+        run: |
+          brew tap greyshepherd/tap "$GITHUB_WORKSPACE"
+          brew install --cask greyshepherd/tap/hazmat
+
+      - name: Push the bump
+        if: steps.bump.outputs.version != ''
+        run: git push
