@@ -3,7 +3,7 @@ name: Bump
 on:
   schedule:
     # Daily, off the hour: a bump only has to beat the next person who installs.
-    - cron: "17 6 * * *"
+    - cron: "22 22 * * *"
   workflow_dispatch:
 
 concurrency:
