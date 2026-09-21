@@ -1,6 +1,6 @@
 cask "hazmat" do
-  version "1.2.0"
-  sha256 "be4a5d7813f5bd92cf7cd0ef273fe27ba8cdfa34281a8b20755639313027ff81"
+  version "1.3.0"
+  sha256 "cadc2384261691c0c60a66f27551b71ddfb59d4a5402dffe120373726342c8c7"
 
   url "https://github.com/greyshepherd/hazmat/releases/download/v#{version}/Hazmat-#{version}.dmg"
   name "Hazmat"
